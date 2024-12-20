@@ -83,8 +83,8 @@
           min-width:180px;
         }
 
-        .autocomplete-item {
-          hover: 
+        .autocomplete-item:hover {
+          background-color: #D5FFFF;
         }
 
 
@@ -94,8 +94,8 @@
 <body>
     <!-- Main Container -->
     <div class="container">
-        <h1>Find Your Perfect Flight</h1>
-        <p>Search for the best deals on flights worldwide!</p>
+        <h1>Take a leap!</h1>
+        <p>enter your international airports and a date to book a Jumper</p>
 
         <!-- Search Form -->
         <form action="/search" method="post" autocomplete="off">
@@ -109,11 +109,6 @@
                 <div id="toDropdown" class="autocomplete-items"></div>
             </div>
             <input type="date" name="departure" id="departure" placeholder="Departure Date" required>
-            <input type="date" name="return" id="return" placeholder="Return Date">
-            <select id="passengers">
-                <option value="1">1 Passenger</option>
-                <option value="2">2 Passengers</option>
-            </select>
             <button type="submit">Search Flights</button>
         </form>
 
