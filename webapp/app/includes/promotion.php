@@ -18,10 +18,10 @@ function isImportantSalesDay() {
 
 if (isImportantSalesDay())
 {
-    return 'we have a coupon code for ' . $_POST['from'] . '-' . $_POST['to'] . '<div style="background-color: #28a745;color: #fff;border: none; padding: 10px 20px;
+    echo 'we have a coupon code for ' . $_REQUEST['from'] . '-' . $_REQUEST['to'] . '<div style="background-color: #28a745;color: #fff;border: none; padding: 10px 20px;
     border-radius: 5px;font-size: 1em;cursor: pointer;transition: background-color 0.3s;">SAVE20</div>';
 } else {
-    return 'No promotion for ' . $_POST['from'] . '-' . $_POST['to'] . ' on ' . $_POST['to'];
+    echo 'No promotion for ' . $_REQUEST['from'] . '-' . $_REQUEST['to'] . ' on ' . $_REQUEST['departure'];
 }
 
 ?>

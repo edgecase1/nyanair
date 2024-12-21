@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Model\Passenger;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+use App\Models\Passenger;
+use App\Models\Airport;
 
 class Booking extends Model
 {
     protected $fillable = [
-        'booking_code',
+        'booking_code' => 'required',
         'from' => 'required',
         'to' => 'required',
         'departure' => 'required',
@@ -16,6 +20,7 @@ class Booking extends Model
         'address' => 'required',
         'city' => 'required',
         'country' => 'required',
+        'amount' => 'required'
         // passengers    
     ];
 
@@ -24,13 +29,18 @@ class Booking extends Model
         return $this->hasMany(Passenger::class);
     }
 
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payments::class);
+    }
+
     public function from(): HasOne
     {
-        return $this->hasOne(Airport::class);
+        return $this->hasOne(Airport::class, 'id', 'from');
     }
 
     public function to(): HasOne
     {
-        return $this->hasOne(Airport::class);
+        return $this->hasOne(Airport::class, 'id', 'to');
     }
 }

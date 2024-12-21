@@ -37,17 +37,27 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .promotion {
+            border: 1px solid silver;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2 class="form-header">Book Your Passengers</h2>
-        <form id="passengerForm" action="/pay" method="get">
+        <div class="promotion">
+        <?php include(app_path().'/includes/promotion.php'); ?>
+        </div>
+        <form id="passengerForm" action="/book" method="post">
+            @csrf
+            <input type="hidden" name="from" value={{$from}}>
+            <input type="hidden" name="to" value={{$to}}>
+            <input type="hidden" name="departure" value={{$departure}}>
             <div class="passenger-group mb-3">
-                    <h5>Passenger 1 and payment details</h5>
+                    <h5>Payment details</h5>
                     <div class="mb-3">
                         <label for="name1" class="form-label">Name (for the payment)</label>
-                        <input type="text" class="form-control" id="name1" name="name1" placeholder="name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="name">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
@@ -81,7 +91,11 @@
                 if(passengerCount >= 2){
                     return;
                 }
-                passengerCount++;
+                passengerCount++; // X
+                if(passengerCount == 1) {
+                    let name = $('#name').val();
+                    console.log(name);
+                }
                 const passengerHTML = `
                     <div class="passenger-group mb-3">
                         <h5>Passenger ${passengerCount} <span class="remove-btn"><i class="fas fa-times-circle"></i></span></h5>

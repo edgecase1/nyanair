@@ -23,4 +23,5 @@ class Airport extends Model
         'county',
         'type'
         ];
+
 }

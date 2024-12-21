@@ -108,6 +108,7 @@
                 <input id="to" name="to" type="text" placeholder="To (City or Airport)" required>
                 <div id="toDropdown" class="autocomplete-items"></div>
             </div>
+            <input type="number" id="passengercount" name="passengercount" min="1" max="9" />
             <input type="date" name="departure" id="departure" placeholder="Departure Date" required>
             <button type="submit">Search Flights</button>
         </form>

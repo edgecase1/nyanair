@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use App\Models\Booking;
 
 class Passenger extends Model
 {
@@ -11,4 +14,9 @@ class Passenger extends Model
         'passport',
         'birthday'
     ];
+
+    public function booking(): BelongsTo
+    {
+        return $this->belongsTo(Booking::class, 'foreign_key');
+    }
 }

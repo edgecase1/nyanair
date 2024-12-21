@@ -31,8 +31,10 @@
 <body>
     <div class="form-container">
         <h2 class="form-header">Credit Card Payment</h2>
-        <?php include(app_path().'/includes/promotion.php'); ?>
-        <form id="paymentForm">
+        <div>
+            from {{$booking->from()->first()->name}} to {{$booking->to()->first()->name}} on {{$booking->departure}} amounts {{$booking->amount}}.
+        </div>
+        <form id="paymentForm" action="/pay" method="post">
             <div class="mb-3">
                 <label for="cardName" class="form-label">Cardholder's Name</label>
                 <input type="text" class="form-control" id="cardName" name="cardName" placeholder="Enter name on card" required>
@@ -51,10 +53,8 @@
                     <input type="password" class="form-control" id="cvv" name="cvv" placeholder="123" required>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="billingZip" class="form-label">Billing Zip Code</label>
-                <input type="text" class="form-control" id="billingZip" name="billingZip" placeholder="Enter ZIP code" required>
-            </div>
+            <input type="hidden" name="booking_code" value="{{$booking->booking_code}}">
+            @csrf
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-success w-100">Pay Now</button>
             </div>
@@ -62,14 +62,7 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $("#paymentForm").submit(function (e) {
-                e.preventDefault();
-                const formData = $(this).serializeArray();
-                console.log("Payment Data Submitted", formData);
-                alert("Payment processed successfully!");
-            });
-        });
+        
     </script>
 </body>
 </html>
