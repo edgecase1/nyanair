@@ -1,0 +1,7 @@
+DB_CONNECTION=mysql
+DB_HOST=database2
+DB_PORT=3306
+DB_DATABASE=nyandb
+DB_USERNAME=root
+DB_PASSWORD=elonisgreat
+
