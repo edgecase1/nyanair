@@ -10,15 +10,22 @@ class AirportController extends Controller
     public function search(Request $request) {
         $incomingFields = $request->validate([
             'search' => 'required|max:255',
+            'order' => 'required'
         ]);
 
+        if(is_null($incomingFields['order'])){ // should be country
+            $order = $incomingFields['order'];
+        } else {
+            $order = $incomingFields['order'];
+        }
         $searchTerm = strip_tags($incomingFields['search']);
 
         $results = Airport::query()
             ->where('code', 'LIKE', "%{$searchTerm}%") 
             ->orWhere('icao', 'LIKE', "%{$searchTerm}%") 
             ->orWhere('name', 'LIKE', "%{$searchTerm}%") 
-            ->orWhere('city', 'LIKE', "%{$searchTerm}%") 
+            ->orWhere('city', 'LIKE', "%{$searchTerm}%")
+            ->orderBy($order)
             ->limit(7)
             ->get();
         return response()->json($results);

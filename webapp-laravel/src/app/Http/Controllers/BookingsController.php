@@ -19,7 +19,8 @@ class BookingsController extends Controller
 		$incomingFields = $request->validate([
             'from' => 'required',
 			'to' => 'required',
-			'departure' => 'required'
+			'departure' => 'required',
+            'passengercount' => 'required'
         ]);
 
 		return view('book')->with([

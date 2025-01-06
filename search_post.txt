@@ -1,0 +1,15 @@
+POST /search HTTP/1.1
+Host: test:8000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 132
+Origin: http://test:8000
+Connection: close
+Referer: http://test:8000/search
+Cookie: XSRF-TOKEN=eyJpdiI6ImJLSitreGE0UW45NnVpUjU5Y0xiS3c9PSIsInZhbHVlIjoiazhLR083emlUbFcrUllCTDYvRTk5dXlGekNrQUQ1d2hSbllUNDNpZ2Ewekl4bFhZYVpTT3lLV3RnbjVVSzBoT1lQUTJXdFdxbjJGS3hvMUMxaGpFa1EwSDF2M1dNemRqVmpDSFpqa2Y4TWtxd1REV0RSTG1wbjVPNm1kNGtHZlAiLCJtYWMiOiIyOTNjNDBjNjY1YjQxYzk4NDJlMWM5ZWRhZGFlZDI2NGQ4ZmE0NzBiMGMwM2VhYzdmMjViNzBkMTViMzI4MTQ4IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlNza1cyMGdLU2VIZGpxV3lIQWpZTnc9PSIsInZhbHVlIjoiQVpFYlpERmJoVGtHZjQ3T0lEZytzeERPdEM3MnZhRGk1NGUyZEd4RmhDK21TODg1VmlPOGswVU5hVjN6UHRsZGRqTDRsT0d3RFNUN0VzZjhkNUg2MTRmQkZjcEtYMGt4WFludXA5blFROXc5aXhkM3lOY0dBVWdoenhuSjNrMUgiLCJtYWMiOiI3ZmM2NDVmNmMxN2M1ZjAyYzQyZTM4NjM2NTljNThlMTljNmZmNTczNzYxZDM5YzExZjc3NzQ5ZDljOWQ1YmQ3IiwidGFnIjoiIn0%3D
+Upgrade-Insecure-Requests: 1
+
+_token=fTAVTxEuq26MP4HZwnbns1YMU8CJa119HssoxDYr&from=JRE\\';+East+60th+Street+Heliport&to=LBC+Lubeck+Blankensee&departure=2024-12-18

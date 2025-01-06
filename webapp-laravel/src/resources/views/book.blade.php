@@ -84,43 +84,73 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            let passengerCount = 0;
+        function GetURLParameter(sParam)
+        {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) 
+            {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) 
+                {
+                    return sParameterName[1];
+                }
+            }
+        }
 
-            $("#addPassenger").click(function () {
-                if(passengerCount >= 2){
+        let i = 1;
+        const maxPassengerCount = 3;
+
+        function add() {
+                if(i >= maxPassengerCount){
                     return;
                 }
-                passengerCount++; // X
-                if(passengerCount == 1) {
-                    let name = $('#name').val();
-                    console.log(name);
+                if(i == 1){
+                    name = $("#name").val();
+                } else {
+                    name = "";
                 }
                 const passengerHTML = `
                     <div class="passenger-group mb-3">
-                        <h5>Passenger ${passengerCount} <span class="remove-btn"><i class="fas fa-times-circle"></i></span></h5>
+                        <h5>Passenger ${i} <span class="remove-btn"><i class="fas fa-times-circle"></i></span></h5>
                         <div class="mb-3">
-                            <label for="passengername${passengerCount}" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="passengername${passengerCount}" name="passengername[]" placeholder="Enter name">
+                            <label for="passengername${i}" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="passengername${i}" name="passengername[]" value="${name}" placeholder="Enter name">
                         </div>
                         <div class="mb-3">
-                            <label for="birthday${passengerCount}" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" id="birthday${passengerCount}" name="birthday[]" placeholder="Enter birthday">
+                            <label for="birthday${i}" class="form-label">Birthday</label>
+                            <input type="date" class="form-control" id="birthday${i}" name="birthday[]" placeholder="Enter birthday">
                         </div>
                         <div class="mb-3">
-                            <label for="passport${passengerCount}" class="form-label">Passport</label>
-                            <input type="text" class="form-control" id="passport${passengerCount}" name="passport[]" placeholder="Enter name">
+                            <label for="passport${i}" class="form-label">Passport</label>
+                            <input type="text" class="form-control" id="passport${i}" name="passport[]" placeholder="Enter name">
                         </div>
                     </div>
                 `;
 
                 $("#passengerList").append(passengerHTML);
-            });
+                i++; // X
+        }
+
+        $(document).ready(function () {
+
+            $("#addPassenger").click(add);
 
             $(document).on("click", ".remove-btn", function () {
                 $(this).closest(".passenger-group").remove();
                 passengerCount--;
             });
+
+            passengerCount = GetURLParameter("passengercount");
+
+            if(passengerCount >= maxPassengerCount){
+                passengerCount = maxPassengerCount;
+                }
+            for(x=1;x<=passengerCount;x++) {
+                console.log(i);
+                add();
+            }
+                
         });
     </script>
 </body>

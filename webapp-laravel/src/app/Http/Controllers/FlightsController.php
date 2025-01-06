@@ -13,6 +13,7 @@ class FlightsController extends Controller
             'from' => 'required|max:255', // VIE+Vienna+International+Airport
 			'to' => 'required|max:255', // EBJ+Esbjerg+Airport
 			'departure' => 'required|max:255', // date 2024-12-03
+			'passengercount' => 'required'
         ]);
 
 		$departure = date_parse_from_format('Y-m-d', $request->post('departure'));
@@ -28,7 +29,8 @@ class FlightsController extends Controller
 			'from_airport' => $from_airport,
 			'to' => $to,
 			'to_airport' => $to_airport,
-			'departure' => $departure['day'] . ".". $departure['month'] . "." . $departure['year']
+			'departure' => $departure['day'] . ".". $departure['month'] . "." . $departure['year'],
+			'passengercount' => $incomingFields['passengercount']
 		]);
 	}
 }

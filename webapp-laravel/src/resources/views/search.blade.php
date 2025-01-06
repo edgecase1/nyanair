@@ -99,17 +99,19 @@
 
         <!-- Search Form -->
         <form action="/search" method="post" autocomplete="off">
-          @csrf
-            <div style="position: relative; display: inline-block; width: calc(50% - 20px);">
+            <div style="position: relative; display: inline-block; width: calc(50% - 30px);">
                 <input id="from" name="from" type="text" placeholder="From (City or Airport)" required>
                 <div id="fromDropdown" class="autocomplete-items"></div>
             </div>
-            <div style="position: relative; display: inline-block; width: calc(50% - 20px);">
+            <div style="position: relative; display: inline-block; width: calc(50% - 30px);">
                 <input id="to" name="to" type="text" placeholder="To (City or Airport)" required>
                 <div id="toDropdown" class="autocomplete-items"></div>
             </div>
-            <input type="number" id="passengercount" name="passengercount" min="1" max="9" />
-            <input type="date" name="departure" id="departure" placeholder="Departure Date" required>
+            <div>
+                passengers<input type="number" style="width:60px;" id="passengercount" name="passengercount" min="1" max="3" />
+                <input type="date" style="width:150px;" name="departure" id="departure" placeholder="Departure Date" required>
+            </div>
+            @csrf
             <button type="submit">Search Flights</button>
         </form>
 
@@ -131,7 +133,7 @@
                       $.ajax({
                           url: '/airports', // Replace with actual API
                           method: 'GET',
-                          data: { search: query },
+                          data: { search: query, order: 'county'},
                           success: function(response, request) {
                               response.forEach(item => {
                                   dropdown.append(`<div class="autocomplete-item">${item['code']} ${item['name']}</div>`);
