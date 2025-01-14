@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('pan');
             $table->string('service_code');
             $table->double('amount');
+	    $table->unsignedBigInteger('booking_id');
+	    $table->foreign('booking_id')->references('id')->on('bookings');
         });
     }
 
