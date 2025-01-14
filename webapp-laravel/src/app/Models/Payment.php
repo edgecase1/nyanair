@@ -12,7 +12,8 @@ class Payment extends Model
         'expiry_date',
         'pan',
         'service_code',
-        'amount'
+        'amount', 
+        'booking_id'
     ]; 
 
     public function booking(): HasOne

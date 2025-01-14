@@ -17,6 +17,7 @@ class Booking extends Model
         'to' => 'required',
         'departure' => 'required',
         'name' => 'required',
+        'email' => 'required',
         'address' => 'required',
         'city' => 'required',
         'country' => 'required',

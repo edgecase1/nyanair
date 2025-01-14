@@ -47,6 +47,7 @@
         <h2 class="form-header">Book Your Passengers</h2>
         <div class="promotion">
         <?php include(app_path().'/includes/promotion.php'); ?>
+        <script src="/promotion.js"></script>
         </div>
         <form id="passengerForm" action="/book" method="post">
             @csrf
@@ -58,6 +59,10 @@
                     <div class="mb-3">
                         <label for="name1" class="form-label">Name (for the payment)</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">email (for the payment)</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="email">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
@@ -151,6 +156,13 @@
                 add();
             }
                 
+        });
+
+        $('#name').on('change', function () {
+            var pass_name_fields = $("[name='passengername[]']");
+            if(pass_name_fields.length >= 1 && ! $(pass_name_fields.get(0)).val()) {
+                $(pass_name_fields.get(0)).val($('#name').val()); 
+            }
         });
     </script>
 </body>

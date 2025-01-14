@@ -38,6 +38,7 @@ class BookingsController extends Controller
 			'departure' => 'required',
             // invoice
             'name' => 'required',
+            'email' => 'required',
             'address' => 'required',
             'city' => 'required',
             'country' => 'required',
@@ -56,6 +57,7 @@ class BookingsController extends Controller
         $booking = new Booking;
         $booking->booking_code = strtoupper(Str::random(6));
         $booking->name = $request->post('name');
+        $booking->email = $request->post('email');
         $booking->address = $request->post('address');
         $booking->city = $request->post('city');
         $booking->country = $request->post('country');

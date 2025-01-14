@@ -54,6 +54,7 @@ class PaymentsController extends Controller
         $payment->pan = $payment_data['pan'];
         $payment->service_code = 
         $payment->amount = $payment_data['amount'];
+        $payment->booking_id = $booking->id;
         $payment->save();
 
         return view('congrats', [

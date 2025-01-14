@@ -36,7 +36,7 @@
             margin-bottom: 20px;
         }
 
-        .book-now-btn {
+        .btn {
             font-size: 1.2rem;
             padding: 10px 30px;
             border: none;
@@ -48,7 +48,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .book-now-btn:hover {
+        .btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
         }
@@ -99,7 +99,8 @@
         <div class="welcome-text">
             Welcome to Your Next Adventure!
         </div>
-        <button class="book-now-btn" onclick="animateRocket()">Book Now</button>
+        <button class="btn" onclick="animateRocket()">Book Now</button>
+        <button class="btn" onclick="window.location.href = '/checkin'">Check in</button>
     </div>
 
     <script>
