@@ -1,16 +1,3 @@
-CREATE TABLE `passengers` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `passport` varchar(255) NOT NULL,
-  `birthday` date NOT NULL,
-  `booking_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `passengers_booking_id_foreign` (`booking_id`),
-  CONSTRAINT `passengers_booking_id_foreign` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40000 ALTER TABLE `passengers` DISABLE KEYS */;
 INSERT INTO `passengers` VALUES
