@@ -96,7 +96,7 @@
   <script>
      function checkin(id) {
         $.ajax({
-          url: 'http://localhost:5000/checkin',
+          url: 'http://checkin.example.org:5000/checkin',
           method: 'POST'
         }).done(function(data, textStatus, jqXHR) {
             alert("checkin done");
@@ -110,7 +110,7 @@
         event.preventDefault(); // Prevent form submission to the server
 
         const formData = $(this).serialize();
-        const url = 'http://localhost:5000/bookings';
+        const url = 'http://checkin.example.org:5000/bookings';
         $.ajax({
           url: `${url}?${formData}`,
           method: 'GET'
