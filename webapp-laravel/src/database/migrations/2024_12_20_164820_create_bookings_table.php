@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('to')->references('id')->on('airports');
             $table->date('departure');
             $table->string('name');
+            $table->string('email');
             $table->string('address');
             $table->string('city');
             $table->string('country');

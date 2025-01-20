@@ -6,18 +6,16 @@ use App\Http\Controllers\AirportController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\PaymentsController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });
+
+Route::get('/checkin', function () { return view('checkin'); });
 
 Route::get('/importcsv', [AirportController::class, 'importCsv']);
 
 Route::get('/airports', [AirportController::class, 'search']);
 
 
-Route::get('/search', function () {
-    return view('search');
-});
+Route::get('/search', function () { return view('search'); });
 Route::post('/search', [FlightsController::class, 'search']);
 
 Route::get('/book', [BookingsController::class, 'bookview']);
