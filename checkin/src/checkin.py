@@ -110,9 +110,15 @@ def bookings():
 
 @app.route('/checkin', methods=['POST'])
 def checkin():
+<<<<<<< Updated upstream
     response = get_response()
     response.status = 200
     return response
+=======
+    booking = retrieve_booking(request)
+    print(booking)
+    return None
+>>>>>>> Stashed changes
 
 #@app.teardown_appcontext
 #def closedb(exception):
