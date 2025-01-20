@@ -77,6 +77,16 @@ services:
         condition: service_healthy
     restart: always
 
+  helpyourselfdesk:
+    container_name: helpyourselfdesk
+    build:
+      context: ./helpyourselfdesk/
+      dockerfile: Dockerfile
+    ports:
+      - 3333:3333
+    networks:
+      - nyanair-net 
+
 volumes:
   mariadb-data:
 

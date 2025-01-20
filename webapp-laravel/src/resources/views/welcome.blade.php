@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -12,7 +13,6 @@
             padding: 0;
             height: 100vh;
             background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -89,6 +89,106 @@
                 opacity: 0;
             }
         }
+
+      /* Chat Widget Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-widget-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-widget-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .chat-widget-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .chat-widget-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .chat-widget-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chat-widget-input button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-widget-input button:hover {
+            background-color: #0056b3;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        .waiting-animation {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+
     </style>
 </head>
 <body>
@@ -112,5 +212,87 @@
             }, 3000);
         }
     </script>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-widget-header">
+            Chat with us!
+            <button id="closeChat">&times;</button>
+        </div>
+        <div class="chat-widget-messages" id="chatMessages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="waiting-animation" id="waitingAnimation">Waiting for response...</div>
+        <div class="chat-widget-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button id="sendMessage">Send</button>
+        </div>
+    </div>
+
+    <button class="chat-toggle" id="chatToggle">&#128172;</button>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize WebSocket
+            const socket = new WebSocket('wss://nyanair.example.com/chat');
+
+            socket.onopen = function() {
+                console.log('WebSocket is connected.');
+            };
+
+            socket.onmessage = function(event) {
+                // Hide waiting animation
+                $('#waitingAnimation').hide();
+
+                const messageElement = `<div style="margin-bottom: 10px;"><strong>Joda:</strong> ${event.data}</div>`;
+                $('#chatMessages').append(messageElement);
+                $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
+            };
+
+            socket.onerror = function(error) {
+                console.error('WebSocket error:', error);
+            };
+
+            socket.onclose = function() {
+                console.log('WebSocket is closed.');
+            };
+
+            // Toggle chat visibility
+            $('#chatToggle').click(function() {
+                $('#chatWidget').fadeIn();
+                $(this).hide();
+            });
+
+            $('#closeChat').click(function() {
+                $('#chatWidget').fadeOut();
+                $('#chatToggle').show();
+            });
+
+            // Send message
+            $('#sendMessage').click(function() {
+                const message = $('#chatInput').val().trim();
+                if (message) {
+                    const messageElement = $('<div style="margin-bottom: 10px;"></div>');
+                    messageElement.text(`You: ${message}`);
+                    $('#chatMessages').append(messageElement);
+                    $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
+                    $('#chatInput').val('');
+
+                    // Show waiting animation
+                    $('#waitingAnimation').show();
+
+                    // Send message via WebSocket
+                    socket.send(message);
+                }
+            });
+
+            // Handle enter key press
+            $('#chatInput').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#sendMessage').click();
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
