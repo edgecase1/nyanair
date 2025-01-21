@@ -1,3 +1,54 @@
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19-11.4.3-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 127.0.0.1    Database: nyandb
+-- ------------------------------------------------------
+-- Server version	11.6.2-MariaDB-ubu2404
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
+
+--
+-- Table structure for table `airports`
+--
+
+DROP TABLE IF EXISTS `airports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `airports` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `code` varchar(255) NOT NULL,
+  `icao` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `elevation` decimal(8,2) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `time_zone` varchar(255) NOT NULL,
+  `city_code` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `county` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9771 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `airports`
+--
+
 LOCK TABLES `airports` WRITE;
 /*!40000 ALTER TABLE `airports` DISABLE KEYS */;
 INSERT INTO `airports` VALUES
@@ -9775,4 +9826,457 @@ INSERT INTO `airports` VALUES
 /*!40000 ALTER TABLE `airports` ENABLE KEYS */;
 UNLOCK TABLES;
 
--- Dump completed on 2024-12-20 11:45:10
+--
+-- Table structure for table `airpots`
+--
+
+DROP TABLE IF EXISTS `airpots`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `airpots` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `flight_number` varchar(255) NOT NULL,
+  `departure_city` varchar(255) NOT NULL,
+  `arrival_city` varchar(255) NOT NULL,
+  `departure_time` varchar(255) NOT NULL,
+  `arrival_time` varchar(255) NOT NULL,
+  `capacity` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `airpots`
+--
+
+LOCK TABLES `airpots` WRITE;
+/*!40000 ALTER TABLE `airpots` DISABLE KEYS */;
+/*!40000 ALTER TABLE `airpots` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bookings`
+--
+
+DROP TABLE IF EXISTS `bookings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bookings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `booking_code` varchar(255) NOT NULL,
+  `from` bigint(20) unsigned NOT NULL,
+  `to` bigint(20) unsigned NOT NULL,
+  `departure` date NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `amount` double NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `bookings_booking_code_unique` (`booking_code`),
+  KEY `bookings_from_foreign` (`from`),
+  KEY `bookings_to_foreign` (`to`),
+  CONSTRAINT `bookings_from_foreign` FOREIGN KEY (`from`) REFERENCES `airports` (`id`),
+  CONSTRAINT `bookings_to_foreign` FOREIGN KEY (`to`) REFERENCES `airports` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bookings`
+--
+
+LOCK TABLES `bookings` WRITE;
+/*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES
+(1,'2025-01-08 21:42:53','2025-01-12 05:55:18','ISI31W',43,85,'2025-09-11','Maxwell Barrett','087 Jonathan Via, Georgeside, AR 43003','Luceroberg','Ireland',417.36,NULL),
+(2,'2025-01-04 17:48:49','2025-01-08 19:19:52','ZXVNZC',30,23,'2025-05-13','Mary Wood','3100 Karen Forks, New Tylerborough, PA 64064','West Vanessaport','Dominican Republic',246.07,NULL),
+(3,'2025-01-09 16:16:41','2025-01-03 02:18:49','M1VIDG',98,18,'2025-03-29','Emily Morris','99251 Steven Mountain, East Jorgeton, RI 42335','New Kennethbury','Uruguay',390.32,NULL),
+(4,'2025-01-13 06:13:15','2025-01-08 20:47:47','RJT2LN',96,12,'2025-07-26','David Montoya','Unit 3558 Box 8523, DPO AA 71759','Staceyside','Trinidad and Tobago',894.31,NULL),
+(5,'2025-01-02 17:23:50','2025-01-06 12:43:12','VTTZS7',9,2,'2025-04-22','Christine Flores','9429 Simpson Mountains, Webershire, CO 16171','Sarahport','Mali',413.21,NULL),
+(6,'2025-01-05 00:15:13','2025-01-05 23:33:04','MB9E54',83,40,'2025-04-22','Anthony Vincent','85662 Yolanda Crescent Apt. 380, West Bryanfort, NH 69811','Christophermouth','France',712.84,NULL),
+(7,'2025-01-05 08:12:14','2025-01-07 11:03:27','WL9H2W',55,69,'2025-10-22','Mrs. Amber Barnes DDS','750 Sean Centers Apt. 717, Theresachester, PA 22396','Sparksmouth','Niue',521.8,NULL),
+(8,'2025-01-04 11:22:02','2025-01-05 07:05:06','USCE1O',6,19,'2025-07-04','Anna Cortez','82037 Edwin Isle, Debbieside, NY 72829','West Sharonstad','Tunisia',290.89,NULL),
+(9,'2025-01-02 03:44:31','2025-01-14 02:40:48','XXXXXX',2,1,'2025-08-18','Jessica Lane','PSC 4800, Box 3800, APO AE 81684','Port Rebecca','Sierra Leone',526.3,NULL),
+(10,'2025-01-12 09:53:13','2025-01-02 06:27:45','W9PGSN',3,96,'2026-01-05','Bethany Espinoza','9425 Eric Drives Apt. 550, Allenton, WI 04784','East Joe','Vanuatu',293.27,NULL),
+(11,'2025-01-06 18:23:45','2025-01-06 18:23:45','AKFZH2',3800,5634,'2025-01-07','Reinhard Kugler','Floragasse 7/5','Vienna','Austria',10000,NULL),
+(12,'2025-01-20 12:50:58','2025-01-20 12:50:58','G6N1QK',3800,5662,'2025-01-21','Reinhard Kugler','Floragasse 7/5','Vienna','Austria',10000,'rkugler@sba-research.org'),
+(13,'2025-01-20 14:13:38','2025-01-20 14:13:38','DAQPMY',3800,7760,'2025-01-22','Reinhard Kugler','Scherbangasse','Vienna','Austria',10000,'rkugler@sba-research.org');
+/*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cache`
+--
+
+DROP TABLE IF EXISTS `cache`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache` (
+  `key` varchar(255) NOT NULL,
+  `value` mediumtext NOT NULL,
+  `expiration` int(11) NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cache`
+--
+
+LOCK TABLES `cache` WRITE;
+/*!40000 ALTER TABLE `cache` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cache` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cache_locks`
+--
+
+DROP TABLE IF EXISTS `cache_locks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `expiration` int(11) NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cache_locks`
+--
+
+LOCK TABLES `cache_locks` WRITE;
+/*!40000 ALTER TABLE `cache_locks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cache_locks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job_batches`
+--
+
+DROP TABLE IF EXISTS `job_batches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `job_batches` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `total_jobs` int(11) NOT NULL,
+  `pending_jobs` int(11) NOT NULL,
+  `failed_jobs` int(11) NOT NULL,
+  `failed_job_ids` longtext NOT NULL,
+  `options` mediumtext DEFAULT NULL,
+  `cancelled_at` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `finished_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job_batches`
+--
+
+LOCK TABLES `job_batches` WRITE;
+/*!40000 ALTER TABLE `job_batches` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job_batches` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jobs`
+--
+
+DROP TABLE IF EXISTS `jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `queue` varchar(255) NOT NULL,
+  `payload` longtext NOT NULL,
+  `attempts` tinyint(3) unsigned NOT NULL,
+  `reserved_at` int(10) unsigned DEFAULT NULL,
+  `available_at` int(10) unsigned NOT NULL,
+  `created_at` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jobs_queue_index` (`queue`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jobs`
+--
+
+LOCK TABLES `jobs` WRITE;
+/*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES
+(1,'0001_01_01_000000_create_users_table',1),
+(2,'0001_01_01_000001_create_cache_table',1),
+(3,'0001_01_01_000002_create_jobs_table',1),
+(4,'2024_12_17_104500_create_airpots_table',2),
+(5,'2024_12_17_105922_create_airpots_table',3),
+(6,'2024_12_17_144637_create_airpots_table',4),
+(7,'2024_12_17_144733_create_airpots_table',5),
+(8,'2024_12_20_164820_create_bookings_table',6),
+(9,'2024_12_20_164828_create_passengers_table',6),
+(10,'2024_12_20_181948_alter_passengers',6),
+(11,'2024_12_20_183942_create_promotions_table',6),
+(12,'2024_12_21_180519_create_table_payments',6);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passengers`
+--
+
+DROP TABLE IF EXISTS `passengers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `passengers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `passport` varchar(255) NOT NULL,
+  `birthday` date NOT NULL,
+  `booking_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `passengers_booking_id_foreign` (`booking_id`),
+  CONSTRAINT `passengers_booking_id_foreign` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passengers`
+--
+
+LOCK TABLES `passengers` WRITE;
+/*!40000 ALTER TABLE `passengers` DISABLE KEYS */;
+INSERT INTO `passengers` VALUES
+(1,'2025-01-06 18:23:45','2025-01-06 18:23:45','Reinhard Kugler','J123123C','1986-08-22',1),
+(2,'2025-01-07 10:26:54','2025-01-07 10:26:54','Johanna','L123123','2025-01-08',2),
+(3,'2025-01-20 12:50:58','2025-01-20 12:50:58','Reinhard','JT222111','2025-01-21',12),
+(4,'2025-01-20 14:13:38','2025-01-20 14:13:38','Reinhard Kugler','J1212312','1986-08-22',13);
+/*!40000 ALTER TABLE `passengers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+DROP TABLE IF EXISTS `password_reset_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+LOCK TABLES `password_reset_tokens` WRITE;
+/*!40000 ALTER TABLE `password_reset_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_reset_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payments`
+--
+
+DROP TABLE IF EXISTS `payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `card_holder_name` varchar(255) NOT NULL,
+  `expiry_date` varchar(255) NOT NULL,
+  `pan` varchar(255) NOT NULL,
+  `service_code` varchar(255) NOT NULL,
+  `amount` double NOT NULL,
+  `booking_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `payments_booking_id_foreign` (`booking_id`),
+  CONSTRAINT `payments_booking_id_foreign` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payments`
+--
+
+LOCK TABLES `payments` WRITE;
+/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` VALUES
+(1,'2025-01-06 18:24:10','2025-01-06 18:24:10','Reinhard Kugler','08/26','PA0X','10000',10000,1),
+(2,'2025-01-07 13:26:27','2025-01-07 13:26:27','Inge Kugler','09/22','PA0X','10000',10000,2),
+(3,'2025-01-07 13:27:41','2025-01-07 13:27:41','Inge Kugler','4/23','PA0X','10000',10000,11),
+(4,'2025-01-20 12:51:10','2025-01-20 12:51:10','Reinhard Kugler','22/24','PA0X','10000',10000,12),
+(5,'2025-01-20 14:14:54','2025-01-20 14:14:54','Reinhard Kugler','08/22','PA0X','10000',10000,13);
+/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `promotions`
+--
+
+DROP TABLE IF EXISTS `promotions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `promotions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `campaign` varchar(255) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `rule` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promotions`
+--
+
+LOCK TABLES `promotions` WRITE;
+/*!40000 ALTER TABLE `promotions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `promotions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sessions_user_id_index` (`user_id`),
+  KEY `sessions_last_activity_index` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES
+('n8kXvEj1VCWGPNrvtMnlqqrelF4bckszIwBEHykp',NULL,'172.27.0.1','Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTVNQWZjTmJUODRRVjllczRibENMYkRwRGx6Q1RqMXZlRzliTTJJSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHBzOi8vbnlhbmFpci5leGFtcGxlLmNvbSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',1737408673),
+('ob5YPnGNA4roIV4i9kNWmyUWS7I1IiwowCxOSlPO',NULL,'172.27.0.1','Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0','YTozOntzOjY6Il90b2tlbiI7czo0MDoiZThIN01yUnRURGFxdzg3Z3lWV1gzWlNQYkppRXVtbWRLdkdQdGpKbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vbnlhbmFpci5leGFtcGxlLmNvbS9jaGVja2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==',1737382939);
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
+
+-- Dump completed on 2025-01-21  4:03:50

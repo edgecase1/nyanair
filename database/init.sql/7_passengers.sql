@@ -1,5 +1,0 @@
-
-/*!40000 ALTER TABLE `passengers` DISABLE KEYS */;
-INSERT INTO `passengers` VALUES
-(1,'2025-01-06 18:23:45','2025-01-06 18:23:45','Reinhard Kugler','J123123C','1986-08-22',1),
-(2,'2025-01-07 10:26:54','2025-01-07 10:26:54','Johanna','L123123','2025-01-08',2);
