@@ -15,8 +15,9 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Bundle app source
 COPY checkin.py /app/
+COPY cert.pem key.pem /app/
 
 EXPOSE 5000
 
 ENV FLASK_APP=checkin
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000", "--cert=cert.pem", "--key=key.pem"]

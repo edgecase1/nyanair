@@ -110,7 +110,7 @@
         event.preventDefault(); // Prevent form submission to the server
 
         const formData = $(this).serialize();
-        const url = 'http://checkin.example.org:5000/bookings';
+        const url = 'https://checkin.example.org:5000/bookings';
         $.ajax({
           url: `${url}?${formData}`,
           method: 'GET'

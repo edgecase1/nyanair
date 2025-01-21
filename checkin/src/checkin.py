@@ -98,6 +98,7 @@ def bookings():
         
         response = get_response()
         result_set = curser_result2json(cursor)
+        print(result_set)
         response.set_data(json.dumps(result_set))
         return response
 
@@ -117,3 +118,6 @@ def checkin():
 #@app.teardown_appcontext
 #def closedb(exception):
 #    connection.close()
+
+if __name__ == "__main__":
+    app.run(ssl_context=('cert.pem', 'key.pem'))
