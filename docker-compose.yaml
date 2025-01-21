@@ -23,8 +23,6 @@ services:
       #image: nyanair-web
     volumes:
       - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./env:/var/www/.env
-      #- ./webapp-laravel/src/:/var/www/
     #ports:
     #  - 9000:9000
     networks:
